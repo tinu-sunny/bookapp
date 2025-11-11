@@ -15,7 +15,6 @@ function AllBooks() {
   
          <div className='text-center mt-10 px-4'>
           <h2 className=' text-3xl md:text-4xl 0 font-bold italic m-8'>Collections</h2>
-
           {/* search bar */}
           <div className='flex  justify-center item-center '>
             <TextInput className='w-64 sm:w-80 md:w-[500px] bg-white text-black' placeholder='Search Books ...'/>
