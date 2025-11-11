@@ -4,7 +4,13 @@ import { Button, Card, Textarea, TextInput } from 'flowbite-react'
 import { TabItem, Tabs } from "flowbite-react";
 import { HiAdjustments, HiClipboardList, HiUserCircle } from "react-icons/hi";
 import { MdDashboard } from "react-icons/md";
+import {  Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
+import { useState } from "react";
+import { HiEnvelope } from "react-icons/hi2";
 function Profile() {
+   const [isOpen, setIsOpen] = useState(true);
+
+  const handleClose = () => setIsOpen(false);
   return (
    <>
    <Header/>
@@ -26,7 +32,7 @@ function Profile() {
 
     <div className='flex justify-between  p-5 '>
         <h4 className='mb-5 font-bold text-2xl '> User_Name</h4>
-        <Button color="alternative">Edit</Button>
+        <Button color="alternative" onClick={() => setIsOpen(true)} >Edit</Button>
     </div>
     <hr className='mb-5'/>
       <p className=' leading-relaxed '>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis officia possimus voluptatem quisquam vitae iste non recusandae, voluptates laborum voluptate doloribus soluta est sapiente, ullam nesciunt fuga a officiis nihil? Lorem ipsum, dolor sit amet consectetur adipisicing elit. Recusandae similique laboriosam deserunt accusamus quidem rerum voluptatibus provident maiores optio aut inventore, dolorem eius. Deserunt ex quos recusandae nam, accusamus placeat?</p>
@@ -120,6 +126,35 @@ function Profile() {
        
       </Tabs>
     </div>
+
+    {/* off canvac */}
+
+     <Drawer open={isOpen} onClose={handleClose}>
+        <DrawerHeader title="Edit" />
+        <DrawerItems>
+         <div>
+  <img src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?semt=ais_hybrid&w=740&q=80" alt="" className="w-40 h-40 rounded-full object-cover shadow-md m-10" />
+  <Button style={{marginTop:'-70px',marginLeft:'90px'}}>edit</Button>
+         </div>
+{/* details  */}
+         <div className='mt-8'>
+             <TextInput className='mb-4' placeholder='Name'></TextInput>
+             <TextInput className='mb-4' placeholder='Password'></TextInput>
+             <TextInput className='mb-4' placeholder='Password'></TextInput>
+             <Textarea></Textarea>
+         </div>
+
+          {/* Form Buttons */}
+                        <div className="flex justify-end space-x-3 pt-2 mt-5">
+                            <button type="reset" className="bg-orange-400 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
+                                Reset
+                            </button>
+                            <button type="submit" className="bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
+                                Update
+                            </button>
+                        </div>
+        </DrawerItems>
+      </Drawer>
     
     </>
   

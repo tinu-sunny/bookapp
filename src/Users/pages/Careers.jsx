@@ -115,10 +115,10 @@ function Careers() {
 
                         {/* Form Buttons */}
                         <div className="flex justify-end space-x-3 pt-2">
-                            <button type="reset" className="bg-yellow-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
+                            <button type="reset" className="bg-orange-400 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
                                 Reset
                             </button>
-                            <button type="submit" className="bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
+                            <button type="submit" className="bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
                                 Submit
                             </button>
                         </div>
