@@ -99,9 +99,8 @@ function AllBooks() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Link to={'/view-books/'}><Button>Know More</Button></Link>
+<Link to={'/view-books/:id'}><Button>Know More</Button></Link>
 </Card>
-
 <Card className='w-80  p-0' style={{backgroundColor:'white'}}>
 
 
@@ -110,9 +109,8 @@ function AllBooks() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/view-books/:id'}><Button>Know More</Button></Link>
 </Card>
-
 <Card className='w-80  p-0' style={{backgroundColor:'white'}}>
 
 
@@ -121,10 +119,9 @@ function AllBooks() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/view-books/:id'}><Button>Know More</Button></Link>
 </Card>
-
-<Card className='w-80  p-0' style={{backgroundColor:'white', marginTop:'-500' }}>
+<Card className='w-80  p-0' style={{backgroundColor:'white'}}>
 
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
@@ -132,28 +129,10 @@ function AllBooks() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/view-books/:id'}><Button>Know More</Button></Link>
 </Card>
-<Card className='w-80  p-0' style={{backgroundColor:'white', marginTop:'-500' }}>
 
 
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-
-<h4>Book Name</h4>
-<p>type</p>
-<p>$</p>
-<Button>Know More</Button>
-</Card>
-<Card className='w-80  p-0' style={{backgroundColor:'white', marginTop:'-500' }}>
-
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-
-<h4>Book Name</h4>
-<p>type</p>
-<p>$</p>
-<Button>Know More</Button>
-</Card>
 </div>
 </div>
 

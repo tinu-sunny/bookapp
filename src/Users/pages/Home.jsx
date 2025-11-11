@@ -54,7 +54,8 @@ function Home() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/all-Books'}>
+  <Button className='text-center w-full'>Explore More</Button></Link>
 </Card>
 
  <Card className='w-80  p-0' style={{backgroundColor:'white'  }}>
@@ -65,7 +66,8 @@ function Home() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/all-Books'}>
+  <Button className='text-center w-full'>Explore More</Button></Link>
 </Card>
 
 
@@ -78,7 +80,8 @@ function Home() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+<Link to={'/all-Books'}>
+  <Button className='text-center w-full'>Explore More</Button></Link>
 </Card>
  <Card className='w-80  p-0' style={{backgroundColor:'white'  }}>
 
@@ -88,7 +91,8 @@ function Home() {
 <h4>Book Name</h4>
 <p>type</p>
 <p>$</p>
-<Button>Know More</Button>
+ <Link to={'/all-Books'}>
+  <Button className='text-center w-full'>Explore More</Button></Link>
 </Card>
 
         </div>
