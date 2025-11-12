@@ -1,4 +1,3 @@
-import React from 'react'
 import AdminHeader from '../components/AdminHeader'
 import AppFooter from '../../components/AppFooter'
 import { Card } from 'flowbite-react'
@@ -8,9 +7,7 @@ function AdminHome() {
   return (
     <>
     <AdminHeader/>
-
     {/* home page  */}
-
     <div className='flex justify-start gap-20 mb-20 mt-10'>
       {/* side slider */}
       <div>
@@ -33,9 +30,7 @@ function AdminHome() {
   <p>Total Number Of Employees <span>100+ </span></p>
 </Card>
         </div>
-
         {/* charts */}
-
         <div className='flex justify-center gap-5 m-5 '>
           {/* chart -1 */}
           <div className='w-full'>
@@ -50,14 +45,8 @@ function AdminHome() {
           </Card>
           </div>
         </div>
-
       </div>
     </div>
-
-
-
-
-
     <AppFooter/>  
     </>
   )

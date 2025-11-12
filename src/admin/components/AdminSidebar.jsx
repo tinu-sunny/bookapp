@@ -11,9 +11,11 @@ function AdminSidebar() {
         <h6 className='text-star'>Admin </h6>
         <SidebarItemGroup>
         
-          <SidebarItem href="#">
-            Home
-          </SidebarItem>
+         <Link to={'/admin-home'}>
+            <SidebarItem href="#">
+              Home
+            </SidebarItem>
+         </Link>
          <Link to={'/admin-books'}>
             <SidebarItem  >
               All-Books
