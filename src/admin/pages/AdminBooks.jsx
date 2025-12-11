@@ -70,8 +70,8 @@ function AdminBooks() {
 
                 </div>
               </TabItem>
-              <TabItem title="Users" >
-                <div className='flex justify-start gap-2  flex-wrap ' style={{ width: '900px' }}>
+              <TabItem title="Users "  >
+                <div className='flex justify-start gap-2  flex-wrap  ' style={{ width: '900px' }}>
                   <Card className='w-70 h-35  '>
                     <p>id:87756476435475334</p>
                     <div className='flex justify-start gap-10'>
