@@ -4,15 +4,24 @@ import { FaSearch } from "react-icons/fa";
 import { Label, Radio } from "flowbite-react";
 import AppFooter from '../../components/AppFooter';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 function AllBooks() {
+     const [token,setToken]=useState('')
+   
+     useEffect(()=>{
+       setToken(sessionStorage.getItem("token"))
+     },[])
+     console.log(token);
+     
+      
   return (
     <>
       <Header />
 
       {/* Heading */}
 
-      <div className='text-center mt-10 px-4'>
+    { token?<div> <div className='text-center mt-10 px-4'>
         <h2 className=' text-3xl md:text-4xl 0 font-bold italic m-8'>Collections</h2>
         {/* search bar */}
         <div className='flex  justify-center item-center '>
@@ -110,7 +119,7 @@ function AllBooks() {
             <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
           </Card>
         </div>
-      </div>
+      </div> </div>: <div className='text-center m-10 font-bold text-4xl'><h1>Please Login to asses the books</h1> <a>Login</a></div>}
 
       <div> <AppFooter />   </div>
 

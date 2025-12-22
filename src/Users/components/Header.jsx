@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Dropdown,
   DropdownDivider,
   DropdownHeader,
@@ -10,9 +11,40 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function Header() {
+
+  const navigate = useNavigate()
+  const [token,setToken]=useState('')
+  const [activeUser,setActiveUser]=useState({})
+
+  useEffect(()=>{
+    setToken(sessionStorage.getItem("token"))
+  },[])
+  console.log(token);
+
+  
+ 
+  useEffect(() => {
+  const storedUser = sessionStorage.getItem("user");
+  if (storedUser) {
+    setActiveUser(JSON.parse(storedUser));
+  }
+}, []);
+console.log(activeUser);
+
+const logout = ()=>{
+  sessionStorage.clear();
+      navigate('/');
+      window.location.reload();
+}
+  
+
+  
+  
   return (
     <>
       <Navbar fluid rounded className="bg-[#d9875d]">
@@ -21,17 +53,20 @@ function Header() {
           <span className="self-center whitespace-nowrap text-xl font-semibold text-white">Book Finder</span>
         </NavbarBrand>
         <div className="flex md:order-2">
-          <Dropdown
+        
+          {token?<Dropdown
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="User settings" img="https://flowbite.com/docs/images/people/profile-picture-5.jpg" rounded />
+              <Avatar alt="User settings" img={activeUser.profile} rounded />
             }
           >
-            <Link to={'/profile'}> <DropdownItem>Dashboard</DropdownItem></Link>
+             <DropdownItem>{activeUser.username}</DropdownItem>
+             <DropdownItem>{activeUser.email}</DropdownItem>
             <DropdownDivider />
-            <DropdownItem>Sign out</DropdownItem>
-          </Dropdown>
+            <DropdownItem onClick={logout}>Sign out</DropdownItem>
+          </Dropdown>:
+        <div className="flex gap-5"><Link to={'/login'}>  <Button>Login</Button></Link> <Avatar alt="User settings" img='https://static.vecteezy.com/system/resources/previews/035/858/656/large_2x/3d-simple-user-icon-isolated-render-profile-photo-symbol-ui-avatar-sign-person-or-people-gui-element-realistic-illustration-vector.jpg' rounded /></div>}
           <NavbarToggle />
         </div>
         <NavbarCollapse >

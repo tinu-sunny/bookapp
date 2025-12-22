@@ -3,7 +3,24 @@ import Header from '../components/Header'
 import { Button, Card, Textarea, TextInput } from 'flowbite-react';
 import { TabItem, Tabs } from "flowbite-react";
 import EditProfile from '../components/EditProfile';
+import { useEffect, useState } from 'react';
 function Profile() {
+  const [token,setToken]=useState('')
+    const [activeUser,setActiveUser]=useState({})
+  
+    useEffect(()=>{
+      setToken(sessionStorage.getItem("token"))
+    },[])
+    console.log(token);
+  
+    
+   
+    useEffect(() => {
+    const storedUser = sessionStorage.getItem("user");
+    if (storedUser) {
+      setActiveUser(JSON.parse(storedUser));
+    }
+  }, []);
 
   return (
     <>
@@ -21,7 +38,7 @@ function Profile() {
       {/* profile pic */}
 
       <div className='ml-10' style={{ marginTop: '-100px' }}>
-        <img src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?semt=ais_hybrid&w=740&q=80" alt="" className="w-50 h-50 rounded-full object-cover shadow-md mb-4" />
+        <img src={activeUser.profile} alt="" className="w-50 h-50 rounded-full object-cover shadow-md mb-4" />
       </div>
 
       {/* details of users */}
@@ -29,7 +46,7 @@ function Profile() {
       <div className=' ml-20 mr-20'>
 
         <div className='flex justify-between  p-5 '>
-          <h4 className='mb-5 font-bold text-2xl '> User_Name</h4>
+          <h4 className='mb-5 font-bold text-2xl '> {activeUser.username}</h4>
           <EditProfile />
         </div>
         <hr className='mb-5' />
