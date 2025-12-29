@@ -119,7 +119,7 @@ function AllBooks() {
             <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
           </Card>
         </div>
-      </div> </div>: <div className='text-center m-10 font-bold text-4xl'><h1>Please Login to asses the books</h1> <a>Login</a></div>}
+      </div> </div>: <div className='text-center m-10 font-bold text-4xl'><h1>Please Login to asses the books</h1><Link to={'/login'}> <div className='hover:underline hover:text-blue-800 text-blue-500 '>Login</div></Link></div>}
 
       <div> <AppFooter />   </div>
 
