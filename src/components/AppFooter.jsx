@@ -44,7 +44,7 @@ function AppFooter() {
 
         {/* Bottom Copyright */}
         <div className="text-center text-black text-xs mt-8 border-t border-black-700 pt-4">
-          Copyright © 2025 All rights reserved | This website is made with 💛 by{" "}
+          Copyright © 2025 All rights reserved | This website is made with 🖤 by{" "}
           <span className="text-black font-semibold">Tinu </span>
         </div>
       </footer>

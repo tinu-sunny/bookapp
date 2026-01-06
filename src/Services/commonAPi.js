@@ -4,7 +4,7 @@ const commonAPI =async (httpMethod,url,reqBody,reqHeader)=>{
         method:httpMethod,
         url,
         data:reqBody,
-        header:reqHeader
+       headers: reqHeader,
     }
     return await axios(reqConfig).then(res=>{
         return res

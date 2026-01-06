@@ -13,6 +13,16 @@ function AllBooks() {
        setToken(sessionStorage.getItem("token"))
      },[])
      console.log(token);
+
+
+     const viewAllBooks = async()=>{
+const reqHeader = {
+        Authorization: `Bearer ${token}`,
+      };
+      console.log(reqHeader);
+          
+      const response =
+     }
      
       
   return (
@@ -83,34 +93,6 @@ function AllBooks() {
         {/* books Grid */}
 
         <div className='w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
-          </Card>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
-          </Card>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
-          </Card>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
-          </Card>
           <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
             <h4>Book Name</h4>

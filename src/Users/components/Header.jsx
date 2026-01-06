@@ -63,6 +63,7 @@ const logout = ()=>{
           >
              <DropdownItem>{activeUser.username}</DropdownItem>
              <DropdownItem>{activeUser.email}</DropdownItem>
+            <Link to={'/profile'}> <DropdownItem>profile</DropdownItem></Link>
             <DropdownDivider />
             <DropdownItem onClick={logout}>Sign out</DropdownItem>
           </Dropdown>:

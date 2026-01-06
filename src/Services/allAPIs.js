@@ -17,3 +17,12 @@ export const emailLoginUser =async(reqBody)=>{
     return await commonAPI('POST',`${serverURL}/api/google-login`,reqBody,{})
 }
 
+
+export const addBook = async(reqBody,reqHeader)=>{
+    return await commonAPI('POST',`${serverURL}/api/addbook`,reqBody,reqHeader)
+}
+
+export const viewbooks =async(reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/getbook`,reqHeader)
+}
+

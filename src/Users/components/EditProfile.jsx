@@ -1,11 +1,19 @@
 import { Button, Textarea, TextInput } from 'flowbite-react';
 import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function EditProfile() {
   const [isOpen, setIsOpen] = useState(false);
+    const [activeUser,setActiveUser]=useState({})
 
   const handleClose = () => setIsOpen(false);
+
+   useEffect(() => {
+      const storedUser = sessionStorage.getItem("user");
+      if (storedUser) {
+        setActiveUser(JSON.parse(storedUser));
+      }
+    }, []);
   return (
     <>
 
@@ -15,12 +23,12 @@ function EditProfile() {
         <DrawerHeader title="Edit" />
         <DrawerItems>
           <div>
-            <img src="https://img.freepik.com/free-vector/user-circles-set_78370-4704.jpg?semt=ais_hybrid&w=740&q=80" alt="" className="w-40 h-40 rounded-full object-cover shadow-md m-10" />
+            <img src={activeUser.profile} alt="" className="w-40 h-40 rounded-full object-cover shadow-md m-10" />
             <Button style={{ marginTop: '-70px', marginLeft: '90px' }}>edit</Button>
           </div>
           {/* details  */}
           <div className='mt-8'>
-            <TextInput className='mb-4' placeholder='Name'></TextInput>
+            <TextInput className='mb-4' placeholder='Name' value={activeUser.username}></TextInput>
             <TextInput className='mb-4' placeholder='Password'></TextInput>
             <TextInput className='mb-4' placeholder='Password'></TextInput>
             <Textarea></Textarea>
