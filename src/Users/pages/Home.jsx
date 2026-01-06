@@ -4,7 +4,27 @@ import { BsSearch } from "react-icons/bs";
 import { Card } from "flowbite-react";
 import AppFooter from '../../components/AppFooter';
 import { Link } from 'react-router-dom';
+import { lastAddbooks } from '../../Services/allAPIs';
+import { useEffect, useState } from 'react';
 function Home() {
+const [bookdata,setBookData]=useState({}) 
+
+  const lastbooksview= async ()=>{
+  const response = await lastAddbooks()
+  console.log(response);
+ if(response.status==200){
+  const data =response.data.lastAddbooks
+  console.log(data);
+  setBookData(data)
+  
+ }
+  
+
+  }
+
+    useEffect(()=>{
+        lastbooksview();
+       },[])
   return (
 
     <>
@@ -51,41 +71,19 @@ function Home() {
         {/* Book display useing cards */}
 
         <div className='m-10 flex justify-evenly gap-5   flex-wrap'>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
 
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/all-Books'}>
-              <Button className='text-center w-full'>Explore More</Button></Link>
-          </Card>
+        { bookdata && bookdata.length > 0 ? bookdata.map((item,index)=>(<Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
+            <img src={item.imageUrl} alt={item.title} className='h-70' width='100%' />
 
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
+            <h4>{item.title}</h4>
+            <p>{item.category}</p>
+            <p>${item.price}</p>
+            <Link to={'/all-Books'}>
+              <Button className='text-center w-full'>Explore More</Button></Link>
+          </Card>)) :<h1>no book found</h1>}
 
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/all-Books'}>
-              <Button className='text-center w-full'>Explore More</Button></Link>
-          </Card>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/all-Books'}>
-              <Button className='text-center w-full'>Explore More</Button></Link>
-          </Card>
-          <Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJNXLI4-WxfgDBBiymHzxj-ugg_ZRfyomA-g&s" alt="book-img" className='h-70' width='100%' />
-            <h4>Book Name</h4>
-            <p>type</p>
-            <p>$</p>
-            <Link to={'/all-Books'}>
-              <Button className='text-center w-full'>Explore More</Button></Link>
-          </Card>
+        
+          
         </div>
         {/* Button expolr more */}
         <div className='flex justify-center items-center m-5'>
