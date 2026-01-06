@@ -21,8 +21,12 @@ export const emailLoginUser =async(reqBody)=>{
 export const addBook = async(reqBody,reqHeader)=>{
     return await commonAPI('POST',`${serverURL}/api/addbook`,reqBody,reqHeader)
 }
-
-export const viewbooks =async(reqHeader)=>{
-    return await commonAPI('GET',`${serverURL}/api/getbook`,reqHeader)
+export const viewbooks = async(reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/getbook`,null,reqHeader)
 }
+
+
+// export const viewbooks =async(reqHeader)=>{
+//     return await commonAPI('GET',`${serverURL}/api/getbook`,reqHeader)
+// }
 
