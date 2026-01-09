@@ -121,7 +121,7 @@ const reqHeader = {
             <p>{item.category}</p>
             <p>${item.price}</p>
           
-            <Link to={'/view-books/:id'}><Button>Know More</Button></Link>
+            <Link to={`/view-books/${item._id}`}><Button>Know More</Button></Link>
           </Card>)) :<h1>No Books Found</h1>}
         </div>
       </div> </div>: <div className='text-center m-10 font-bold text-4xl'><h1>Please Login to asses the books</h1><Link to={'/login'}> <div className='hover:underline hover:text-blue-800 text-blue-500 '>Login</div></Link></div>}

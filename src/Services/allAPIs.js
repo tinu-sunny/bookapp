@@ -25,8 +25,15 @@ export const viewbooks = async(reqHeader)=>{
     return await commonAPI('GET',`${serverURL}/api/getbook`,null,reqHeader)
 }
 
-export const lastAddbooks = async(reqHeader)=>{
-    return await commonAPI('GET',`${serverURL}/api/lastAddbooks`,null,reqHeader)
+export const lastAddbooks = async()=>{
+    return await commonAPI('GET',`${serverURL}/api/lastAddbooks`)
+}
+export const viewbook = async(id,reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/viewbooks/${id}`,null,reqHeader)
+}
+
+export const adminuserviewAPI = async(reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/view-users-admin`,null,reqHeader)
 }
 
 

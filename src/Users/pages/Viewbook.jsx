@@ -1,10 +1,43 @@
 import Header from '../components/Header'
 import { Button, Card } from 'flowbite-react'
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { Link, useParams } from 'react-router-dom';
+import { viewbook } from '../../Services/allAPIs';
 function Viewbook() {
   const [openModal, setOpenModal] = useState(false);
+const [token , setToken] = useState('')
+const [bookData,setBookData]= useState({})
+    console.log(bookData);
+
+ useEffect(()=>{
+       setToken(sessionStorage.getItem("token"))
+     },[])
+     console.log(token);
+
+  const {id} = useParams()
+  console.log(id);
+
+ const viewActiveBook = async()=>{
+const reqHeader = {
+        Authorization:`Bearer ${token}`,
+      };
+      console.log(reqHeader);
+        
+  const response = await viewbook(id,reqHeader) 
+  console.log(response);
+  if(response.status == 200){
+    const data = response.data.bookdata
+    setBookData(data)
+    
+  }
+  
+ }
+
+ useEffect(()=>{
+  viewActiveBook();
+ },[token])
+  
   return (
 
     <>
@@ -14,7 +47,7 @@ function Viewbook() {
         <div className='flex gap-10'>
           {/* image */}
           <div onClick={() => setOpenModal(true)}>
-            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'700px'} />
+            <img src={bookData.imageUrl} alt="" width={'700px'} />
           </div>
 
           {/* conntent */}
@@ -22,26 +55,26 @@ function Viewbook() {
           <div>
             {/* heading */}
             <div className='text-center mb-5'>
-              <h3>Book Name</h3>
-              <a href="">-Author Name</a>
+              <h3>{bookData.title}</h3>
+              <a href="">{bookData.author}</a>
             </div>
             {/* details */}
 
             <div className='flex justify-between mb-5'>
-              <p>Publisher</p>
-              <p>Language</p>
-              <p>No Of Pages</p>
+              <p>Publisher :-{bookData.publisher}</p>
+              <p>Language :-{bookData.language}</p>
+              <p>No Of Pages :-{bookData.noofpages}</p>
             </div>
 
             {/* buy ditails */}
 
             <div className='flex justify-between mb-5'>
-              <p>Seller Mail</p>
-              <p>Real price</p>
-              <p>ISBN</p>
+              <p>Seller Mail :- {bookData.userMail}</p>
+              <p>Real price :- {bookData.price}</p>
+              <p>ISBN :- {bookData.isbn}</p>
             </div>
             {/* Description */}
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi possimus dignissimos architecto deserunt dolor nobis veniam eius odio distinctio consequuntur. Quae repudiandae est alias ratione fuga animi maxime reprehenderit quia? Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt dolorem illo dignissimos ipsa at nulla facilis. Consequuntur animi, porro tenetur quae nostrum beatae, nam obcaecati eum et praesentium cupiditate alias.</p>
+            <p>{bookData.abstract}</p>
 
             {/* Button */}
 
