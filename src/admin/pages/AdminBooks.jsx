@@ -3,25 +3,27 @@ import AdminSidebar from '../components/AdminSidebar'
 import AppFooter from '../../components/AppFooter'
 import { Card, TabItem, Tabs } from "flowbite-react";
 import { useEffect, useState } from 'react';
-import { adminuserviewAPI } from '../../Services/allAPIs';
+import { adminuserviewAPI, viewbooksadmin } from '../../Services/allAPIs';
 
 
 function AdminBooks() {
    const [token , setToken] = useState('')
    const [userData,setUserData] = useState({})
    const [errorMessage,setErrorMessage]=useState('')
+   const [bookData,setBookData]=useState([])
       console.log(userData);
 
     useEffect(()=>{
            setToken(sessionStorage.getItem("token"))
          },[])
          console.log(token);
-
-  const adminuserview = async()=>{
-const reqHeader = {
+         const reqHeader = {
         Authorization:`Bearer ${token}`,
       };
       console.log(reqHeader);
+
+  const adminuserview = async()=>{
+
 
     const response = await adminuserviewAPI(reqHeader)
     console.log(response);
@@ -39,10 +41,27 @@ const reqHeader = {
 
   }
 
+
+
+  const bookviewadmin = async()=>{
+    let response = await viewbooksadmin(reqHeader)
+    console.log(response.data.allbooks);
+
+    if(response.status==200){
+      setBookData(response.data.allbooks)
+      
+    }
+
+    
+  }
+
+
   useEffect(()=>{
-    adminuserview()
+    adminuserview();
+    bookviewadmin()
   },[token])
 
+  
   return (
     <>
 
@@ -69,43 +88,15 @@ const reqHeader = {
             <Tabs aria-label="Default tabs" variant="default">
               <TabItem active title="Book List" >
                 <div className='flex justify-center  gap-3 flex-wrap'>
-                  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
+               { bookData && bookData.length > 0 ? bookData.map(item=>(
+                 <Card className='w-60'>
+                    <img src={item.imageUrl}alt="" width={'200px'} height={'200px'} />
+                    <p>Title :{item.title}</p>
+                    <p>Author :{item.author}</p>
+                    <p>$:{item.price}</p>
                   </Card>
-                  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>  <Card className='w-60'>
-                    <img src="https://media.gettyimages.com/id/eds005/vector/school-books.jpg?s=1024x1024&w=gi&k=20&c=TqO7AvU7jFwPHIGgJWJmYjbPUcoYmZADpYJrALJ2DxA=" alt="" width={'200px'} height={'200px'} />
-                    <p>Book name</p>
-                    <p>Author</p>
-                    <p>Price</p>
-                  </Card>
+               )):<h1> Network error</h1>}
+                  
 
                 </div>
               </TabItem>

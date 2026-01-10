@@ -66,10 +66,10 @@ function Auth({register}) {
         sessionStorage.setItem("token",response.data.token)
  sessionStorage.setItem(
   "user",
-  JSON.stringify(response.data.existingUser)
+  JSON.stringify(response.data.activeUser)
 );
           // alert(response.data.message)
-            if(response.data.activeUser.role=='Admin'){
+            if(response.data.activeUser.role=='admin'){
 
           // 
           setTimeout(() => {

@@ -36,5 +36,7 @@ export const adminuserviewAPI = async(reqHeader)=>{
     return await commonAPI('GET',`${serverURL}/api/view-users-admin`,null,reqHeader)
 }
 
-
+export const viewbooksadmin = async(reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/view-allbooks-admin`,null,reqHeader)
+}
 

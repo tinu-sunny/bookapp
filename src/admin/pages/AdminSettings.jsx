@@ -2,8 +2,19 @@ import AdminHeader from '../components/AdminHeader'
 import AppFooter from '../../components/AppFooter'
 import AdminSidebar from '../components/AdminSidebar'
 import { Button, Card, TextInput } from 'flowbite-react'
+import { useEffect, useState } from 'react'
 
 function AdminSettings() {
+  
+ const[adminData , setAdminData] =useState([])
+
+
+ useEffect(()=>{
+  const storedUser = JSON.parse(sessionStorage.getItem("user"))
+  setAdminData(storedUser)
+ },[])
+console.log(adminData);
+
   return (
     <>
       <AdminHeader />
@@ -37,12 +48,12 @@ function AdminSettings() {
               {/* admin image */}
               <div className='text-center'>
                 <div className='flex justify-center flex-col'>
-                  <img src="https://www.citypng.com/public/uploads/preview/hd-man-user-illustration-icon-transparent-png-701751694974843ybexneueic.png" alt="" className='w-40 h-40 rounded-full object-cover' />
+                  <img src={adminData.profile} alt="" className='w-40 h-40 rounded-full object-cover' />
                   <Button className='mt-[-25px] ml-[70px] w-4'>edit</Button>
                 </div>
                 {/* edit box */}
                 <div className='mt-10' >
-                  <TextInput className='mb-4' placeholder='name'></TextInput>
+                  <TextInput className='mb-4' placeholder='name' value={adminData.username}></TextInput>
                   <TextInput className='mb-4' placeholder='pass1'></TextInput>
                   <TextInput className='mb-4' placeholder='pass2'></TextInput>
                 </div >
