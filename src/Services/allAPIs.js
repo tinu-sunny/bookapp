@@ -40,3 +40,10 @@ export const viewbooksadmin = async(reqHeader)=>{
     return await commonAPI('GET',`${serverURL}/api/view-allbooks-admin`,null,reqHeader)
 }
 
+export const adminprofileedit = async(reqBody,reqHeader)=>{
+    return await commonAPI('PUT',`${serverURL}/api/profile-admin-update`,reqBody,reqHeader)
+}
+
+export const viewactiveuser = async(reqHeader)=>{
+    return await commonAPI('GET',`${serverURL}/api/viewactiveuser`,null,reqHeader)
+}

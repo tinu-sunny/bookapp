@@ -32,6 +32,8 @@ function Profile() {
   }, []);
   console.log(token);
 
+
+
   useEffect(() => {
     const storedUser = sessionStorage.getItem("user");
     if (storedUser) {
@@ -91,7 +93,7 @@ function Profile() {
 
       for (let key in bookdata) {
         if (key != "UploadedImages") {
-          reqBody.append(key, bookdata[key]);
+          reqBody.append(key, bookdata[key] );
         } else {
           bookdata.UploadedImages.forEach((item) =>
             // console.log(item)
