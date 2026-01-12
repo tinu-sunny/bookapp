@@ -14,6 +14,11 @@ import {
 import { Link } from "react-router-dom";
 
 function AdminHeader() {
+
+  const logout = ()=>{
+   sessionStorage.clear();
+   
+  }
   return (
    <>
       <Navbar fluid rounded className="bg-[#d9875d] ">
@@ -22,7 +27,7 @@ function AdminHeader() {
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Book Finder</span>
       </NavbarBrand>
       <div className="flex md:order-2 mr-20">
-        <Button>LogOut</Button>
+       <Link to={'/'}> <Button onClick={logout}>LogOut</Button></Link>
         <NavbarToggle />
       </div>
    

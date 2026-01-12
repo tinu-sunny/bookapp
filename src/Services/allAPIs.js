@@ -47,3 +47,7 @@ export const adminprofileedit = async(reqBody,reqHeader)=>{
 export const viewactiveuser = async(reqHeader)=>{
     return await commonAPI('GET',`${serverURL}/api/viewactiveuser`,null,reqHeader)
 }
+
+export const userprofileedit = async(reqBody,reqHeader)=>{
+    return await commonAPI('PUT',`${serverURL}/api/profile-user-update`,reqBody,reqHeader)
+}
