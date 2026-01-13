@@ -3,7 +3,8 @@ import { Button, Card, Textarea, TextInput } from "flowbite-react";
 import { TabItem, Tabs } from "flowbite-react";
 import EditProfile from "../components/EditProfile";
 import { useEffect, useState } from "react";
-import { addBook } from "../../Services/allAPIs";
+import { addBook, viewactiveuser } from "../../Services/allAPIs";
+import { serverURL } from "../../Services/serverURL";
 function Profile() {
   const [token, setToken] = useState("");
   const [activeUser, setActiveUser] = useState({});
@@ -25,38 +26,49 @@ function Profile() {
   const [preview, setPreview] = useState("");
   const [previewlist, setPreviewlist] = useState([]);
 
-  console.log(bookdata);
+  // console.log(bookdata);
 
   useEffect(() => {
     setToken(sessionStorage.getItem("token"));
   }, []);
-  console.log(token);
+  // console.log(token);
 
 
 
-  useEffect(() => {
-    const storedUser = sessionStorage.getItem("user");
-    if (storedUser) {
-      setActiveUser(JSON.parse(storedUser));
-    }
-  }, []);
+  const activeuserData = async()=>{
+
+     const reqHeader = {
+        Authorization:`Bearer ${token}`,
+      };
+      // console.log(reqHeader);
+
+  const response = await viewactiveuser(reqHeader)
+  // console.log(response);
+  if (response.status==200){
+    setActiveUser(response.data.userdata)
+  }
+  
+ }
+ useEffect(()=>{
+  activeuserData()
+ },[token])
 
   const handleimageupload = async (e) => {
-    console.log(e.target.files);
+    // console.log(e.target.files);
     let imageArray = bookdata.UploadedImages;
     if (imageArray.length < 3) {
       imageArray.push(e.target.files[0]);
-      console.log(imageArray);
+      // console.log(imageArray);
 
       setBookdata({ ...bookdata, UploadedImages: imageArray });
       const url = URL.createObjectURL(e.target.files[0]);
-      console.log(url);
+      // console.log(url);
       setPreview(url);
 
       const urllist = previewlist;
 
       urllist.push(url);
-      console.log(urllist);
+      // console.log(urllist);
       setPreviewlist(urllist);
     } else {
       alert("max 3 files only");
@@ -64,7 +76,7 @@ function Profile() {
   };
 
   const addbookuser = async () => {
-    console.log(bookdata);
+    // console.log(bookdata);
     const {
       title,
       author,
@@ -84,7 +96,7 @@ function Profile() {
       const reqHeader = {
         Authorization: `Bearer ${token}`,
       };
-      console.log(reqHeader);
+      // console.log(reqHeader);
 
       // body
       const reqBody = new FormData();
@@ -105,14 +117,15 @@ function Profile() {
       // api
 
       const response = await addBook(reqBody, reqHeader);
-      console.log(response);
+      // console.log(response);
       if (response.status == 200) {
         alert(response.data.message);
       } else {
         alert(response.response.data);
       }
     } catch (err) {
-      console.log("error", err);
+      // console.log("error", err);
+      res.status(400).json('error'.err)
     }
 
    
@@ -136,7 +149,7 @@ function Profile() {
 
       <div className="ml-10" style={{ marginTop: "-100px" }}>
         <img
-          src={activeUser.profile}
+          src={`${serverURL}/uploads/${activeUser.profile}`}
           alt=""
           className="w-50 h-50 rounded-full object-cover shadow-md mb-4"
         />
@@ -151,14 +164,7 @@ function Profile() {
         </div>
         <hr className="mb-5" />
         <p className=" leading-relaxed ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-          officia possimus voluptatem quisquam vitae iste non recusandae,
-          voluptates laborum voluptate doloribus soluta est sapiente, ullam
-          nesciunt fuga a officiis nihil? Lorem ipsum, dolor sit amet
-          consectetur adipisicing elit. Recusandae similique laboriosam deserunt
-          accusamus quidem rerum voluptatibus provident maiores optio aut
-          inventore, dolorem eius. Deserunt ex quos recusandae nam, accusamus
-          placeat?
+        {activeUser.bio}
         </p>
       </div>
 

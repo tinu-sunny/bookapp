@@ -13,28 +13,43 @@ import {
 } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { serverURL } from "../../Services/serverURL";
+import { viewactiveuser } from "../../Services/allAPIs";
 
 
 function Header() {
 
   const navigate = useNavigate()
   const [token,setToken]=useState('')
-  const [activeUser,setActiveUser]=useState({})
+  const [activeUser,setActiveUser]=useState([])
 
   useEffect(()=>{
     setToken(sessionStorage.getItem("token"))
   },[])
-  console.log(token);
+  // console.log(token);
 
   
  
-  useEffect(() => {
-  const storedUser = sessionStorage.getItem("user");
-  if (storedUser) {
-    setActiveUser(JSON.parse(storedUser));
+const activeuserData = async()=>{
+
+     const reqHeader = {
+        Authorization:`Bearer ${token}`,
+      };
+      // console.log(reqHeader);
+
+  const response = await viewactiveuser(reqHeader)
+  // console.log(response);
+  if (response.status==200){
+    // console.log(response);
+    
+    setActiveUser(response.data.userdata)
   }
-}, []);
-console.log(activeUser);
+  
+ }
+ useEffect(()=>{
+  activeuserData()
+ },[token])
+// console.log(activeUser);
 
 const logout = ()=>{
   sessionStorage.clear();
@@ -58,7 +73,7 @@ const logout = ()=>{
             arrowIcon={false}
             inline
             label={
-              <Avatar alt="User settings" img={activeUser.profile} rounded />
+              <Avatar alt={activeUser.username} img={`${serverURL}/uploads/${activeUser.profile}`} rounded />
             }
           >
              <DropdownItem>{activeUser.username}</DropdownItem>

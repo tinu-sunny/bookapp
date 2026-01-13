@@ -2,6 +2,7 @@ import { Button, Label, Textarea, TextInput } from 'flowbite-react';
 import { Drawer, DrawerHeader, DrawerItems } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { userprofileedit, viewactiveuser } from '../../Services/allAPIs';
+import { serverURL } from '../../Services/serverURL';
 
 function EditProfile() {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,9 +12,9 @@ function EditProfile() {
     const [oldpass,setOldpass]= useState('')
  const[newpass,setNewpass]=useState(false)
 
-    console.log(activeUser);
+    // console.log(activeUser);
     
-console.log(token);
+// console.log(token);
 
   const handleClose = () => setIsOpen(false);
 
@@ -71,14 +72,14 @@ const handleUpdate = async () => {
     const reqHeader = {
       Authorization: `Bearer ${token}`,
     };
-    console.log(reqHeader);
+    // console.log(reqHeader);
 
     const reqbody = new FormData();
     for (let key in activeUser) {
       reqbody.append(key, activeUser[key]);
     }
     const response = await userprofileedit(reqbody, reqHeader);
-    console.log(response);
+    // console.log(response);
     if (response.status == 200) {
       alert("updated");
     }
@@ -99,7 +100,7 @@ const handleUpdate = async () => {
           <div>
           <Label htmlFor='image'>
             <TextInput type='file' id='image' hidden onChange={(e)=>{handleimageupload(e)}}></TextInput>
-              <img src={preview ? preview :activeUser.profile} alt={activeUser.username} id='image' className="w-40 h-40 rounded-full object-cover shadow-md m-10" />
+              <img src={preview ? preview :`${serverURL}/uploads/${activeUser.profile}`} alt={activeUser.username} id='image' className="w-40 h-40 rounded-full object-cover shadow-md m-10" />
               <div id='image'><p style={{ marginTop: '-70px', marginLeft: '90px' }}>edit</p></div>
           </Label>
           </div>
