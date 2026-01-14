@@ -82,6 +82,8 @@ const handleUpdate = async () => {
     // console.log(response);
     if (response.status == 200) {
       alert("updated");
+      window.location.reload();
+
     }
   };
 
@@ -125,7 +127,7 @@ const handleUpdate = async () => {
             <button type="reset" className="bg-orange-400 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200">
               Reset
             </button>
-            <button type="submit" className="bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200" onClick={handleUpdate}>
+            <button type="submit" className="bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200" onClick={()=>{handleUpdate();setIsOpen(false)}}>
               Update
             </button>
           </div>

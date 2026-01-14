@@ -9,7 +9,10 @@ import { viewbooks } from '../../Services/allAPIs';
 
 function AllBooks() {
      const [token,setToken]=useState('')
-     const[allBooks,setAllBooks]=useState({})
+     const[allBooks,setAllBooks]=useState([])
+     const [ sortbook,setSortbook]=useState([])
+     console.log(sortbook);
+     
      console.log(allBooks);
      
    
@@ -20,8 +23,6 @@ function AllBooks() {
 
 
      const viewAllBooks = async()=>{
-
-    
 const reqHeader = {
         Authorization:`Bearer ${token}`,
       };
@@ -33,18 +34,33 @@ const reqHeader = {
       if(response.status==200){
          const books = response.data.allbooks
         setAllBooks(books)
+
+  setSortbook(books)
+
       console.log(books);
 
       }
 
       }
-
-      
-     
-
      useEffect(()=>{
       viewAllBooks();
+      
      },[token])
+
+
+     const sort = (keyword)=>{
+console.log(keyword);
+
+if(keyword=='Nofilter'){
+  setSortbook(allBooks)
+}
+else{
+      const sortdata = allBooks.filter(item =>
+  item.category.toLowerCase().trim()==keyword.toLowerCase().trim());
+     setSortbook(sortdata)
+}
+
+     }
      
       
   return (
@@ -72,40 +88,40 @@ const reqHeader = {
 
           <div className=' space-y-3 mb-4'>
             <div className="flex items-center gap-2  m-4">
-              <Radio id="No-filter" name="countries" value="No-filter" defaultChecked />
-              <Label htmlFor="No-filter" >No-filter</Label>
+              <Radio id="No-filter" name="countries" value="Nofilter"  onClick={()=>{sort('Nofilter')}} defaultChecked />
+              <Label htmlFor="No-filter">No-filter</Label>
             </div>
             <div className="flex items-center gap-2  m-4 text-black">
-              <Radio id=" Literary Fiction" name="countries" value=" Literary Fiction" />
+              <Radio id=" Literary Fiction" name="countries" value=" Literary Fiction" onClick={()=>{sort('Literary Fiction')}}/>
               <Label htmlFor=" Literary Fiction"> Literary Fiction</Label>
             </div>
             <div className="flex items-center  m-4 gap-2">
-              <Radio id="Philosophy" name="countries" value="Philosophy" />
+              <Radio id="Philosophy" name="countries" value="Philosophy" onClick={()=>{sort('Philosophy')}} />
               <Label htmlFor="Philosophy">Philosophy</Label>
             </div>
             <div className="flex items-center  m-4 gap-2">
-              <Radio id="Thriller" name="countries" value="Thriller" />
+              <Radio id="Thriller" name="countries" value="Thriller" onClick={()=>{sort('Thriller')}}/>
               <Label htmlFor="Thriller">Thriller</Label>
             </div>
             <div className="flex items-center m-4 gap-2">
-              <Radio id="Romance" name="countries" value="Romance" />
+              <Radio id="Romance" name="countries" value="Romance"onClick={()=>{sort('Romance')}} />
               <Label htmlFor="Romance">Romance</Label>
             </div>
             <div className="flex items-center m-4 gap-2">
-              <Radio id="Horror" name="countries" value="Horror" />
+              <Radio id="Horror" name="countries" value="Horror" onClick={()=>{sort('Horror')}} />
               <Label htmlFor="Horror">Horror</Label>
             </div>
 
             <div className="flex items-center m-4 gap-2">
-              <Radio id="Auto/Biography" name="countries" value="Auto/Biography" />
+              <Radio id="Auto/Biography" name="countries" value="Auto/Biography" onClick={()=>{sort('Auto Biography')}} />
               <Label htmlFor="Auto/Biography">Auto/Biography</Label>
             </div>
             <div className="flex items-center  m-4 gap-2">
-              <Radio id="Self-Help" name="countries" value="Self-Help" />
+              <Radio id="Self-Help" name="countries" value="Self-Help" onClick={()=>{sort('Self Help')}} />
               <Label htmlFor="Self-Help">Self-Help</Label>
             </div>
             <div className="flex items-center  m-4 gap-2">
-              <Radio id="Politics" name="countries" value="Politics" />
+              <Radio id="Politics" name="countries" value="Politics" onClick={()=>{sort('Politics')}}/>
               <Label htmlFor="Politics">Politics</Label>
             </div>
           </div>
@@ -115,14 +131,14 @@ const reqHeader = {
         {/* books Grid */}
 
         <div className='w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8'>
-         { allBooks &&  allBooks.length > 0 ? allBooks.map((item,index)=>(<Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
+         { sortbook &&  sortbook.length > 0 ? sortbook.map((item,index)=>(<Card className='w-80  p-0' style={{ backgroundColor: 'white' }}>
             <img src={item.imageUrl} alt="book-img" className='h-70' width='100%' />
             <h4>{item.title}</h4>
             <p>{item.category}</p>
             <p>${item.price}</p>
           
             <Link to={`/view-books/${item._id}`}><Button>Know More</Button></Link>
-          </Card>)) :<h1>No Books Found</h1>}
+          </Card>)) :<h1>No Books Found in this category</h1>}
         </div>
       </div> </div>: <div className='text-center m-10 font-bold text-4xl'><h1>Please Login to asses the books</h1><Link to={'/login'}> <div className='hover:underline hover:text-blue-800 text-blue-500 '>Login</div></Link></div>}
 

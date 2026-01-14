@@ -160,7 +160,7 @@ function Profile() {
       <div className=" ml-20 mr-20">
         <div className="flex justify-between  p-5 ">
           <h4 className="mb-5 font-bold text-2xl "> {activeUser.username}</h4>
-          <EditProfile />
+          <EditProfile  />
         </div>
         <hr className="mb-5" />
         <p className=" leading-relaxed ">
