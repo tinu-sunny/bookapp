@@ -4,32 +4,37 @@ import { FaSearch } from "react-icons/fa";
 import { Label, Radio } from "flowbite-react";
 import AppFooter from '../../components/AppFooter';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { viewbooks } from '../../Services/allAPIs';
+import { searchContext } from '../../context/SearchContextShare';
 
 function AllBooks() {
      const [token,setToken]=useState('')
      const[allBooks,setAllBooks]=useState([])
      const [ sortbook,setSortbook]=useState([])
-     console.log(sortbook);
+
+     const {searchKey,setSearchKey}=useContext(searchContext)
+     console.log(searchKey);
      
-     console.log(allBooks);
+    //  console.log(sortbook);
+     
+    //  console.log(allBooks);
      
    
      useEffect(()=>{
        setToken(sessionStorage.getItem("token"))
      },[])
-     console.log(token);
+    //  console.log(token);
 
 
      const viewAllBooks = async()=>{
 const reqHeader = {
         Authorization:`Bearer ${token}`,
       };
-      console.log(reqHeader);
+      // console.log(reqHeader);
           
-      const response = await viewbooks(reqHeader)
-      console.log(response);
+      const response = await viewbooks(searchKey,reqHeader)
+      // console.log(response);
       
       if(response.status==200){
          const books = response.data.allbooks
@@ -37,7 +42,7 @@ const reqHeader = {
 
   setSortbook(books)
 
-      console.log(books);
+      // console.log(books);
 
       }
 
@@ -45,11 +50,11 @@ const reqHeader = {
      useEffect(()=>{
       viewAllBooks();
       
-     },[token])
+     },[token,searchKey])
 
 
      const sort = (keyword)=>{
-console.log(keyword);
+// console.log(keyword);
 
 if(keyword=='Nofilter'){
   setSortbook(allBooks)
@@ -73,7 +78,9 @@ else{
         <h2 className=' text-3xl md:text-4xl 0 font-bold italic m-8'>Collections</h2>
         {/* search bar */}
         <div className='flex  justify-center item-center '>
-          <TextInput className='w-64 sm:w-80 md:w-[500px] bg-white text-black' placeholder='Search Books ...' />
+          <TextInput className='w-64 sm:w-80 md:w-[500px] bg-white text-black' placeholder='Search Books ...' onChange={(e)=>{
+            setSearchKey(e.target.value)
+          }} />
           <Button className='ml-2'>
             <FaSearch className=" h-4 w-4 " />
           </Button>
