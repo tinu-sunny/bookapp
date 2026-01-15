@@ -51,3 +51,7 @@ export const viewactiveuser = async(reqHeader)=>{
 export const userprofileedit = async(reqBody,reqHeader)=>{
     return await commonAPI('PUT',`${serverURL}/api/profile-user-update`,reqBody,reqHeader)
 }
+
+export const paymentApI = async(reqBody,reqHeader)=>{
+    return await commonAPI('PUT',`${serverURL}/api/Payment`,reqBody,reqHeader)
+}

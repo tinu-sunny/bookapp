@@ -3,7 +3,9 @@ import { Button, Card } from 'flowbite-react'
 import { Modal, ModalBody, ModalHeader } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from 'react-router-dom';
-import { viewbook } from '../../Services/allAPIs';
+import { paymentApI, viewbook } from '../../Services/allAPIs';
+import {loadStripe} from '@stripe/stripe-js';
+import { serverURL } from '../../Services/serverURL';
 function Viewbook() {
   const [openModal, setOpenModal] = useState(false);
 const [token , setToken] = useState('')
@@ -38,6 +40,31 @@ const reqHeader = {
   viewActiveBook();
  },[token])
   
+ const handlepayment = async()=>{
+
+ console.log('inside the function');
+ const reqHeader = {
+        Authorization:`Bearer ${token}`,
+      };
+
+  const reqbody ={
+    bookdetails:bookData
+  }
+
+ const stripe = await loadStripe('pk_test_51SplyoDtzJRTYP8Lyva8UzFxQHKESk7wJw68gRmCGNYRTuqzYI3Y8ooH3ExTKHRp9LI7XB0K8Y5jw0NGyMVZYJmb00u5dxuewl');
+ console.log(stripe);
+ 
+try{
+ const response = await paymentApI(reqbody,reqHeader)
+console.log(response);
+
+}
+catch(err){
+  console.log(err);
+  
+}
+ 
+ }
   return (
 
     <>
@@ -47,7 +74,7 @@ const reqHeader = {
         <div className='flex gap-10'>
           {/* image */}
           <div onClick={() => setOpenModal(true)}>
-            <img src={bookData.imageUrl} alt="" width={'700px'} />
+            <img src={bookData.imageUrl} alt="" className='h-100 w-full'/>
           </div>
 
           {/* conntent */}
@@ -80,7 +107,7 @@ const reqHeader = {
 
             <div className='flex justify-end space-x-3 pt-2 mt-5'>
               <Link to={'/all-books'}> <Button className='bg-orange-400 hover:bg-red-500 font-medium py-2 px-4 rounded-lg shadow-md transition duration-200'>Back</Button></Link>
-              <Button className='bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200'>Buy</Button>
+              <Button className='bg-green-400 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200' onClick={()=>{handlepayment()}}>Buy</Button>
             </div>
           </div>
         </div>
@@ -97,7 +124,7 @@ const reqHeader = {
           {/* image */}
 
           <div className='mt-8 flex justify-center gap-6 flex-wrap'>
-            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
+            {/* <img src={`${serverURL}/uploads/${item.url}`} alt="" width={'200px'} /> */}
             <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
             <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
             <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />  <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
