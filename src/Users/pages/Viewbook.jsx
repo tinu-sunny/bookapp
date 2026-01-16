@@ -42,17 +42,26 @@ const reqHeader = {
   
  const handlepayment = async()=>{
 
- console.log('inside the function');
- const reqHeader = {
+alert('inside the handlepayment function')
+
+console.log(bookData);
+
+ const stripe = await loadStripe(import.meta.env.VITE_FONTEND_PAYMENTKEY);
+ console.log(stripe);
+
+  const reqHeader = {
         Authorization:`Bearer ${token}`,
       };
+
+      console.log("token");
+      
 
   const reqbody ={
     bookdetails:bookData
   }
 
- const stripe = await loadStripe('pk_test_51SplyoDtzJRTYP8Lyva8UzFxQHKESk7wJw68gRmCGNYRTuqzYI3Y8ooH3ExTKHRp9LI7XB0K8Y5jw0NGyMVZYJmb00u5dxuewl');
- console.log(stripe);
+  console.log('body',reqbody);
+  
  
 try{
  const response = await paymentApI(reqbody,reqHeader)
@@ -61,6 +70,7 @@ console.log(response);
 }
 catch(err){
   console.log(err);
+  alert("please try after some time")
   
 }
  
@@ -124,10 +134,11 @@ catch(err){
           {/* image */}
 
           <div className='mt-8 flex justify-center gap-6 flex-wrap'>
+            {bookData && bookData.UploadedImages ? bookData.UploadedImages.map(item =>(    <img src={`${serverURL}/uploads/${item}`} alt="" width={'200px'} />)):<h1>No Image </h1>}
             {/* <img src={`${serverURL}/uploads/${item.url}`} alt="" width={'200px'} /> */}
-            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
-            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
-            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />  <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
+        
+            {/* <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />
+            <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} />  <img src="https://images.pexels.com/photos/4132936/pexels-photo-4132936.png?cs=srgb&dl=pexels-dayanrodio-4132936.jpg&fm=jpg" alt="" width={'200px'} /> */}
           </div>
 
         </ModalBody>
