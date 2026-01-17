@@ -42,7 +42,7 @@ const reqHeader = {
   
  const handlepayment = async()=>{
 
-alert('inside the handlepayment function')
+// alert('inside the handlepayment function')
 
 console.log(bookData);
 
@@ -66,6 +66,17 @@ console.log(bookData);
 try{
  const response = await paymentApI(reqbody,reqHeader)
 console.log(response);
+
+// if(response==)
+const sessionID = response.data.session.id
+console.log(sessionID);
+const sessionURL = response.data.session.url
+console.log(sessionURL);
+ window.location.href=sessionURL;
+
+ stripe.initCheckout({sessionID:sessionID})
+
+
 
 }
 catch(err){
